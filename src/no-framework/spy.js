@@ -14,10 +14,20 @@ function fn(impl = () => {}) {
     return impl(...args)
   }
   mockFn.mock = {calls: []}
+  mockFn.mockImplementation= newImpl => (impl = newImpl )
   return mockFn
 }
 
-spyOn(utils, 'getWinner')
+const mySpyOn = (util, prop) => {
+const original = util[prop]
+util[prop] = fn();
+util[prop].mockRestore = () => {
+   return util[prop] = original
+  }
+
+}
+
+mySpyOn(utils, 'getWinner')
 utils.getWinner.mockImplementation((p1, p2) => p1)
 
 const winner = thumbWar('Kent C. Dodds', 'Ken Wheeler')

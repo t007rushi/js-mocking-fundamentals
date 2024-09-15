@@ -9,6 +9,7 @@
 const assert = require("assert");
 const thumbWar = require("../thumb-war");
 const utils = require("../utils");
+const jest = require('jest')
 
 // Your Code:
 const fn = (cb) => {
